@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp" >
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btpns_logo"
+            android:layout_marginTop="32dp"/>
+
+        
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Demi Niat baik \nWujudkan Kebaikan Bersama"
+            android:gravity="center"
+            android:textSize="11sp"
+            android:layout_below="@+id/logo" />
+
+        <TextView
+            android:id="@+id/subWelcomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tepat, wujudkan niat baik lebih cepat"
+            android:gravity="center"
+            android:textSize="11sp"
+            android:layout_below="@+id/welcomeText" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_below="@+id/welcomeText">
+
+<!--            <Button-->
+<!--                android:id="@+id/loginButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                android:layout_marginRight="50dp"-->
+<!--                android:text="Login"-->
+<!--                android:backgroundTint="#FA7C06" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/registerButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                android:layout_marginRight="50dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="Register"-->
+<!--                android:backgroundTint="#FA7C06"-->
+<!--                android:layout_below="@+id/loginButton" />-->
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

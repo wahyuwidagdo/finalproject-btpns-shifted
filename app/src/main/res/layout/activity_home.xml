@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btpns_logo"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Selamat Datang, \nNasabah Baik"
+            android:layout_below="@+id/logo"
+            android:textSize="15sp" />
+        
+        <LinearLayout
+            android:id="@+id/cardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/welcomeText"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:background="#EAEAEAEA">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saldo Anda"
+                android:layout_marginRight="100dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. 5000000"
+                android:layout_marginLeft="90dp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/cardLayout"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/border">
+
+            <ImageButton
+                android:id="@+id/mutasiImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/ic_baseline_account_balance_wallet_24"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:text="Mutasi Rekening"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_below="@+id/mutasiImageButton"/>
+
+            <ImageButton
+                android:id="@+id/plnImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="160dp"
+                android:layout_toRightOf="@+id/mutasiImageButton"
+                android:background="@drawable/ic_baseline_flash_on_24"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="230dp"
+                android:text="Pembayaran PLN (Pascabayar)"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_below="@+id/plnImageButton"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

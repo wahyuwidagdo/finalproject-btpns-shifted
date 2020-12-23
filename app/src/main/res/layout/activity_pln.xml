@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlnActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btpns_logo"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Pembayaran PLN (Pascabayar)"
+            android:gravity="center"
+            android:layout_below="@+id/logo"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcomeText"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/idPelangganTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Id Pelanggan"
+                android:textSize="15sp"/>
+            
+            <EditText
+                android:id="@+id/idPelangganEditText"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+
+            <Button
+                android:id="@+id/cekTagihanButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/idPelangganEditText"
+                android:layout_margin="10dp"
+                android:text="Cek Tagihan"
+                android:backgroundTint="#FA7C06"/>
+
+            <TextView
+                android:id="@+id/totalTagihanTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Tagihan"
+                android:textSize="15sp"
+                android:layout_below="@+id/cekTagihanButton"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/totalTagihanEditText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/totalTagihanTextView"/>
+
+            <TextView
+                android:id="@+id/namaPelangganTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Pelanggan"
+                android:textSize="15sp"
+                android:layout_below="@+id/totalTagihanEditText"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/namaPelangganEditView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/namaPelangganTextView"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/namaPelangganEditView"
+                android:text="Bayar"
+                android:backgroundTint="#FA7C06"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
