@@ -59,7 +59,7 @@ public class NasabahDao {
         String check = "SELECT id FROM Nasabah WHERE username=:username AND isLogin=:isLogin";
         Query query = entityManager.createQuery(check);
         query.setParameter("username", username);
-        query.setParameter("isLogin", true);
+        query.setParameter("isLogin", "true");
         if (query.getResultList().size() != 0) {
             System.out.println("Masuk 12");
             return (int)query.getResultList().get(0);

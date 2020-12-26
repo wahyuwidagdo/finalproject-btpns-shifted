@@ -139,7 +139,7 @@ public class ApiReceive {
                 this.message = message;
             };
             channel.basicConsume("messageFromDatabase", true, deliverCallback, consumerTag -> {});
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(5);
             if (!this.message.equals("0")) {
                 JSONObject object = new JSONObject();
                 object.put("response", 200);
