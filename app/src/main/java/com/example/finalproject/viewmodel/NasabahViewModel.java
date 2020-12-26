@@ -35,4 +35,12 @@ public class NasabahViewModel extends ViewModel {
         return mutableLiveData;
     }
 
+    public LiveData<APIResponse> getSaldo(String string) {
+        if (mutableLiveData == null) {
+            nasabahRepository = nasabahRepository.getInstance();
+        }
+        mutableLiveData = nasabahRepository.getSaldo(string);
+        return mutableLiveData;
+    }
+
 }
