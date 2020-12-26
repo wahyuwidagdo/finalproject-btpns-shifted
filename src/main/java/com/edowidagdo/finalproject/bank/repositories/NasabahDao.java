@@ -54,4 +54,31 @@ public class NasabahDao {
             return query.getResultList().size();
         }
     }
+
+    public int checkSaldoNasabah(String username) {
+        String check = "SELECT id FROM Nasabah WHERE username=:username AND isLogin=:isLogin";
+        Query query = entityManager.createQuery(check);
+        query.setParameter("username", username);
+        query.setParameter("isLogin", true);
+        if (query.getResultList().size() != 0) {
+            System.out.println("Masuk 12");
+            return (int)query.getResultList().get(0);
+        } else {
+            System.out.println("Masuk 22");
+            return query.getResultList().size();
+        }
+    }
+
+    public int checkSaldoId(Nasabah nasabah) {
+        String check = "SELECT saldo FROM Nasabah WHERE id=:id";
+        Query query = entityManager.createQuery(check);
+        query.setParameter("id", nasabah.getId());
+        if (query.getResultList().size() != 0 ) {
+            System.out.println("Masuk Cek Saldo 12");
+            return (int)query.getResultList().get(0);
+        } else {
+            System.out.println("Masuk Cek Saldo 22");
+            return query.getResultList().size();
+        }
+    }
 }

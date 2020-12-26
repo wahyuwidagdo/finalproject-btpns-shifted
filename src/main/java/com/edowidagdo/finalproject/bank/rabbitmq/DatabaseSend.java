@@ -18,6 +18,22 @@ public class DatabaseSend {
             channel.queueDeclare("messageFromDatabase", false, false, false, null);
             channel.basicPublish("", "messageFromDatabase", null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + message + "'");
+        } catch (Exception e) {
+            System.out.println("Gagal mengirim pesan ke API. . . " + e);
         }
     }
+
+    public void sendToRestApiLogin(String message) throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+            channel.queueDeclare("messageFromDatabase", false, false, false, null);
+            channel.basicPublish("", "messageFromDatabase", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sent '" + message + "'");
+        } catch (Exception e) {
+            System.out.println("Gagal mengirim pesan ke API. . ." + e);
+        }
+    }
+
 }

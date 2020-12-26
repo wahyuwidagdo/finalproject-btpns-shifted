@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 
 public class Services {
     private NasabahDao nasabahDao;
-    private EntityManager entityManagerNasabah, entityManagerUser;
+    private EntityManager entityManagerNasabah;
 
     public void connectJPANasabah(){
         this.entityManagerNasabah = Persistence
@@ -63,9 +63,9 @@ public class Services {
 //        return cek;
     }
 
-    public int logoutNasabah(String dataUser){
+    public int logoutNasabah(String dataNasabah){
         connectJPANasabah();
-        Nasabah nasabah = new Gson().fromJson(dataUser, Nasabah.class);
+        Nasabah nasabah = new Gson().fromJson(dataNasabah, Nasabah.class);
         int cek =nasabahDao.checkNasabah(nasabah);
         commitJPA(entityManagerNasabah);
         System.out.println("Cek: "+cek);
@@ -76,6 +76,22 @@ public class Services {
         connectJPANasabah();
         nasabahDao.updateStatusLogin(nasabah,status);
         commitJPA(entityManagerNasabah);
+    }
+
+    public int checkNasabah(String dataNasabah) {
+        connectJPANasabah();
+        int check = nasabahDao.checkSaldoNasabah(dataNasabah);
+        commitJPA(entityManagerNasabah);
+        System.out.println("Cek : " + check);
+        return check;
+    }
+
+    public int checkSaldo(Nasabah nasabah) {
+        connectJPANasabah();
+        int saldo = nasabahDao.checkSaldoId(nasabah);
+        System.out.println("Method Check Saldo : " + saldo);
+        commitJPA(entityManagerNasabah);
+        return saldo;
     }
 
 }

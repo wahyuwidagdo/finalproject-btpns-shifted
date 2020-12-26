@@ -12,6 +12,7 @@ import java.util.concurrent.TimeoutException;
 
 public class ApiReceive {
     protected String message;
+    private String saldoResponse;
 
     public String getMessage() {
         return message;
@@ -19,6 +20,14 @@ public class ApiReceive {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSaldoResponse() {
+        return saldoResponse;
+    }
+
+    public void setSaldoResponse(String saldoResponse) {
+        this.saldoResponse = saldoResponse;
     }
 
     public String receiveFromDatabase() throws IOException, TimeoutException {
@@ -116,6 +125,40 @@ public class ApiReceive {
         }
 
         return loginResponse;
+    }
+
+    public String checkSaldo() throws IOException, TimeoutException {
+        try {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost("localhost");
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody(), "UTF-8");
+                System.out.println("[x] Received '" + message + "'");
+                this.message = message;
+            };
+            channel.basicConsume("messageFromDatabase", true, deliverCallback, consumerTag -> {});
+            TimeUnit.SECONDS.sleep(2);
+            if (!this.message.equals("0")) {
+                JSONObject object = new JSONObject();
+                object.put("response", 200);
+                object.put("status", "Success");
+                object.put("message", "Success Check Saldo");
+                object.put("Saldo", this.message);
+                saldoResponse = object.toJSONString();
+            } else {
+                JSONObject object = new JSONObject();
+                object.put("response", 400);
+                object.put("status", "Error");
+                object.put("message", "Anda Tidak Memiliki Akses untuk cek saldo, Mohon Login Terlebih Dahulu");
+                saldoResponse = object.toJSONString();
+            }
+        } catch (Exception e) {
+            System.out.println("Exception Login Res : " + e);
+        }
+        System.out.println("Isi Saldo Response : " + this.getSaldoResponse());
+        return this.getSaldoResponse();
     }
 
 }

@@ -43,4 +43,15 @@ public class ApiSend {
         }
     }
 
+    public static void checkSaldo(String nasabah) throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+            channel.queueDeclare("checkSaldo", false, false, false, null);
+            channel.basicPublish("", "checkSaldo", null, nasabah.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sent '" + nasabah + "'");
+        }
+    }
+
 }

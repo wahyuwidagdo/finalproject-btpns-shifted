@@ -97,4 +97,36 @@ public class DatabaseReceive {
         }
     }
 
+    public void checkSaldo() {
+        try {
+            connectRabbitMQ();
+            channel = connection.createChannel();
+            channel.queueDeclare("checkSaldo", false, false, false, null);
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String mhsString = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                System.out.println("[x] Receive '" + mhsString + "'");
+                int res = services.checkNasabah(mhsString);
+                String nilaiSaldo = "";
+                if (res != 0) {
+                    Nasabah nasabah = new Nasabah();
+                    nasabah.setId(res);
+                    System.out.println("Cek Saldo Status : " + res);
+                    int saldoTotal = services.checkSaldo(nasabah);
+                    System.out.println("Isi saldo total : " + saldoTotal);
+                    nilaiSaldo = String.valueOf(saldoTotal);
+                } else {
+                    nilaiSaldo = "0";
+                }
+                try {
+                    send.sendToRestApi(nilaiSaldo);
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                }
+            };
+            channel.basicConsume("checkSaldo", true, deliverCallback, consumerTag -> {});
+        } catch (Exception e) {
+            System.out.println("Error Check Saldo = " + e);
+        }
+    }
+
 }

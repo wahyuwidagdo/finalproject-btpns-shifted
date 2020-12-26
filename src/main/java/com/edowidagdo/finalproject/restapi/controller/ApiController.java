@@ -9,10 +9,7 @@ import com.google.gson.Gson;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ApiController {
@@ -67,6 +64,22 @@ public class ApiController {
             object.put("response",400);
             object.put("status","Error");
             object.put("message","Error Logout!!!");
+            return new ResponseEntity<>(object, HttpStatus.OK);
+        }
+    }
+
+    // -------------------Cek Saldo-------------------------------------------
+    @RequestMapping(value = "/checksaldo/{username}", method = RequestMethod.GET)
+    public ResponseEntity<?> checkSaldo(@PathVariable("username") String username) {
+        try {
+            ApiSend.checkSaldo(username);
+            return new ResponseEntity<>(receiver.checkSaldo(), HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("Error = " + e);
+            JSONObject object = new JSONObject();
+            object.put("response", 400);
+            object.put("status", "Error");
+            object.put("message", "Error login, Please check Username and Password");
             return new ResponseEntity<>(object, HttpStatus.OK);
         }
     }

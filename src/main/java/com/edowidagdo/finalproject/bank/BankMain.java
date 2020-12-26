@@ -11,6 +11,7 @@ public class BankMain {
             receive.addNasabah();
             receive.loginNasabah();
             receive.logoutNasabah();
+            receive.checkSaldo();
         } catch (Exception e) {
             System.out.println("Error BankMain = " + e);
         }
