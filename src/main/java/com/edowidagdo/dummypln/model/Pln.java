@@ -1,6 +1,9 @@
 package com.edowidagdo.dummypln.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "pln")
@@ -10,17 +13,21 @@ public class Pln {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "idPelanggan")
-    private int idPelanggan;
+    @Column(name = "id_pelanggan")
+    private int id_pelanggan;
 
-    @Column(name = "namaPelanggan")
-    private String namaPelanggan;
+    @Column(name = "nama_pelanggan")
+    private String nama_pelanggan;
 
-    @Column(name = "totalTagihan")
-    private int totalTagihan;
+    @Column(name = "total_tagihan")
+    private int total_tagihan;
 
-    @Column(name = "statusPembayaran")
-    private String statusPembayaran;
+    @Column(name = "status_pembayaran")
+    private String status_pembayaran;
+
+    @CreationTimestamp
+    @Column(name = "transaction_date", insertable = false, updatable = false, nullable = false)
+    private Date transaction_date;
 
     public Long getId() {
         return id;
@@ -30,35 +37,43 @@ public class Pln {
         this.id = id;
     }
 
-    public int getIdPelanggan() {
-        return idPelanggan;
+    public int getId_pelanggan() {
+        return id_pelanggan;
     }
 
-    public void setIdPelanggan(int idPelanggan) {
-        this.idPelanggan = idPelanggan;
+    public void setId_pelanggan(int id_pelanggan) {
+        this.id_pelanggan = id_pelanggan;
     }
 
-    public String getNamaPelanggan() {
-        return namaPelanggan;
+    public String getNama_pelanggan() {
+        return nama_pelanggan;
     }
 
-    public void setNamaPelanggan(String namaPelanggan) {
-        this.namaPelanggan = namaPelanggan;
+    public void setNama_pelanggan(String nama_pelanggan) {
+        this.nama_pelanggan = nama_pelanggan;
     }
 
-    public int getTotalTagihan() {
-        return totalTagihan;
+    public int getTotal_tagihan() {
+        return total_tagihan;
     }
 
-    public void setTotalTagihan(int totalTagihan) {
-        this.totalTagihan = totalTagihan;
+    public void setTotal_tagihan(int total_tagihan) {
+        this.total_tagihan = total_tagihan;
     }
 
-    public String getStatusPembayaran() {
-        return statusPembayaran;
+    public String getStatus_pembayaran() {
+        return status_pembayaran;
     }
 
-    public void setStatusPembayaran(String statusPembayaran) {
-        this.statusPembayaran = statusPembayaran;
+    public void setStatus_pembayaran(String status_pembayaran) {
+        this.status_pembayaran = status_pembayaran;
+    }
+
+    public Date getTransaction_date() {
+        return transaction_date;
+    }
+
+    public void setTransaction_date(Date transaction_date) {
+        this.transaction_date = transaction_date;
     }
 }
