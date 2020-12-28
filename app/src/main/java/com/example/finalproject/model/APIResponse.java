@@ -9,6 +9,10 @@ public class APIResponse {
     @Expose
     private String status;
 
+    @SerializedName("Saldo")
+    @Expose
+    private String saldo;
+
     @SerializedName("message")
     @Expose
     private String message;
@@ -23,6 +27,14 @@ public class APIResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
     }
 
     public String getMessage() {

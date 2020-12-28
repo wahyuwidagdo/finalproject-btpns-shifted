@@ -27,8 +27,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        findViewById();
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         onClickGroup();
         init();
     }
@@ -48,19 +49,14 @@ public class HomeActivity extends AppCompatActivity {
                 Rp.setMonetaryDecimalSeparator(',');
                 Rp.setGroupingSeparator('.');
                 currency.setDecimalFormatSymbols(Rp);
-                Double saldo = Double.parseDouble(apiResponse.getMessage());
+                Double saldo = Double.parseDouble(apiResponse.getSaldo());
                 binding.totalSaldoTextView.setText(currency.format(saldo));
             }
         });
     }
 
-    void findViewById() {
-        mutasiImageButton = findViewById(R.id.mutasiImageButton);
-        plnImageButton = findViewById(R.id.plnImageButton);
-    }
-
     void onClickGroup() {
-        mutasiImageButton.setOnClickListener(new View.OnClickListener() {
+        binding.mutasiImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MutasiActivity.class);
@@ -68,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        plnImageButton.setOnClickListener(new View.OnClickListener() {
+        binding.plnImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, PlnActivity.class);

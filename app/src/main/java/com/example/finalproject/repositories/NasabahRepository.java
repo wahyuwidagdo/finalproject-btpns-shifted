@@ -1,5 +1,7 @@
 package com.example.finalproject.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.finalproject.model.APIResponse;
@@ -66,16 +68,18 @@ public class NasabahRepository {
 
     public MutableLiveData<APIResponse> getSaldo(String string) {
         MutableLiveData<APIResponse> saldoRequest = new MutableLiveData<>();
+        Log.d("Test 1", "Test 1");
         api.getSaldo(string).enqueue(new Callback<APIResponse>() {
             @Override
             public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
                 saldoRequest.setValue(response.body());
-                System.out.println("Test : " + response.body());
+                System.out.println("Test : ");
             }
 
             @Override
             public void onFailure(Call<APIResponse> call, Throwable t) {
                 saldoRequest.setValue(null);
+                System.out.println("Test Failure");
             }
         });
         return saldoRequest;
