@@ -1,8 +1,6 @@
 package com.edowidagdo.finalproject.restapi.controller;
 
-import com.edowidagdo.finalproject.bank.model.Login;
-import com.edowidagdo.finalproject.bank.model.Nasabah;
-import com.edowidagdo.finalproject.bank.model.Register;
+import com.edowidagdo.finalproject.bank.model.*;
 import com.edowidagdo.finalproject.restapi.rabbitmq.ApiReceive;
 import com.edowidagdo.finalproject.restapi.rabbitmq.ApiSend;
 import com.google.gson.Gson;
@@ -80,6 +78,27 @@ public class ApiController {
             object.put("response", 400);
             object.put("status", "Error");
             object.put("message", "Error login, Please check Username and Password");
+            return new ResponseEntity<>(object, HttpStatus.OK);
+        }
+    }
+
+    // -------------------Get Total Tagihan----------------------------------------
+    @RequestMapping(value = "/totaltagihan/{id_pelanggan}", method = RequestMethod.GET)
+    public ResponseEntity<?> getTotalTagihan(@PathVariable("id_pelanggan") String id_pelanggan) {
+        try {
+            ApiSend.getTotalTagihan(id_pelanggan);
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setData(new Gson().fromJson(receiver.getTagihanPlnServer(), Tagihan.class));
+            apiResponse.setMessage("Mantap");
+            apiResponse.setStatus("Success");
+            apiResponse.setResponse(200);
+            return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+            JSONObject object = new JSONObject();
+            object.put("response", 400);
+            object.put("status", "Error");
+            object.put("message", "Error Login, Please check Username and Password");
             return new ResponseEntity<>(object, HttpStatus.OK);
         }
     }

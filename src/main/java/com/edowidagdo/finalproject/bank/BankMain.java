@@ -12,6 +12,8 @@ public class BankMain {
             receive.loginNasabah();
             receive.logoutNasabah();
             receive.checkSaldo();
+            receive.getTotalTagihan();
+            receive.getTagihanPlnServer();
         } catch (Exception e) {
             System.out.println("Error BankMain = " + e);
         }

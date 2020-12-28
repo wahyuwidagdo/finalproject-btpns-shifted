@@ -36,4 +36,30 @@ public class DatabaseSend {
         }
     }
 
+    public void sendToPlnServer(String message) throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+            channel.queueDeclare("sendToPln", false, false, false, null);
+            channel.basicPublish("", "sendToPln", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sent '" + message + "'");
+        } catch (Exception e) {
+            System.out.println("Gagal mengirim data transfer ke Dummy Server : (" + e);
+        }
+    }
+
+    public void sendToApiReceive(String message) throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+            channel.queueDeclare("sendToApiReceive", false, false, false, null);
+            channel.basicPublish("", "sendToApiReceive", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Sent '" + message + "'");
+        } catch (Exception e) {
+            System.out.println("Gagal mengirim data transfer ke Dummy Server : (" + e);
+        }
+    }
+
 }

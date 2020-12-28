@@ -115,6 +115,7 @@ public class DatabaseReceive {
                     System.out.println("Isi saldo total : " + saldoTotal);
                     nilaiSaldo = String.valueOf(saldoTotal);
                 } else {
+                    System.out.println("Test123");
                     nilaiSaldo = "0";
                 }
                 try {
@@ -126,6 +127,46 @@ public class DatabaseReceive {
             channel.basicConsume("checkSaldo", true, deliverCallback, consumerTag -> {});
         } catch (Exception e) {
             System.out.println("Error Check Saldo = " + e);
+        }
+    }
+
+    public void getTotalTagihan() {
+        try {
+            connectRabbitMQ();
+            channel = connection.createChannel();
+            channel.queueDeclare("getTotalTagihan", false, false, false, null);
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String nbString =new String(delivery.getBody(), StandardCharsets.UTF_8);
+                System.out.println("[x] Receive from nasabah '" + nbString + "'");
+                try {
+                    send.sendToPlnServer(nbString);
+                } catch (Exception e) {
+                    System.out.println("Error send transfer : " + e);
+                }
+            };
+            channel.basicConsume("getTotalTagihan", true, deliverCallback, consumerTag -> {});
+        } catch (Exception e) {
+            System.out.println("Error Registrasi Nasabah : " + e);
+        }
+    }
+
+    public void getTagihanPlnServer() {
+        try {
+            connectRabbitMQ();
+            channel = connection.createChannel();
+            channel.queueDeclare("sendTagihanToPln", false, false, false, null);
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String nbString = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                System.out.println("[x] Receive from Pln '" + nbString + "'");
+                try {
+                    send.sendToApiReceive(nbString);
+                } catch (Exception e) {
+                    System.out.println("Error send transfer : " + e);
+                }
+            };
+            channel.basicConsume("sendTagihanToPln", true, deliverCallback, consumerTag -> {});
+        } catch (Exception e) {
+            System.out.println("Error Registrasi Nasabah : " + e);
         }
     }
 

@@ -54,4 +54,15 @@ public class ApiSend {
         }
     }
 
+    public static void getTotalTagihan(String tagihan) throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel()) {
+            channel.queueDeclare("getTotalTagihan", false, false, false, null);
+            channel.basicPublish("", "getTotalTagihan", null, tagihan.getBytes(StandardCharsets.UTF_8));
+            System.out.println("[x] Send Id Pelanggan : '" + tagihan + "'");
+        }
+    }
+
 }

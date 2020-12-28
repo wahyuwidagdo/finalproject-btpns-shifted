@@ -161,4 +161,40 @@ public class ApiReceive {
         return this.getSaldoResponse();
     }
 
+    public String getTagihanPlnServer() throws IOException, TimeoutException {
+        this.message = "";
+        try {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost("localhost");
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody(), "UTF-8");
+                System.out.println("[x] Received '" + message + "'");
+                this.message = message;
+            };
+            channel.basicConsume("sendToApiReceive", true, deliverCallback, consumerTag -> {});
+
+            while (this.message.equals("")) {
+                TimeUnit.MILLISECONDS.sleep(5);
+            }
+
+            if (!this.message.equals("0")) {
+                JSONObject object = new JSONObject();
+                saldoResponse = this.message;
+            } else {
+                JSONObject object = new JSONObject();
+                object.put("response", 400);
+                object.put("status", "Error");
+                object.put("message", "IdPelanggan yang anda inputkan salah, Mohon periksa lagi!!!");
+                saldoResponse = object.toJSONString();
+            }
+        } catch (Exception e) {
+            System.out.println("Exception Login Res : " + e);
+        }
+        System.out.println("Isi Saldo Response : " + this.getSaldoResponse());
+        return this.getSaldoResponse();
+    }
+
 }
